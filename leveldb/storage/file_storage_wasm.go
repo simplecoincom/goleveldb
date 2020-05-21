@@ -5,16 +5,24 @@ import (
 	"syscall"
 )
 
+type unixFileLock struct {
+}
+
+func (fl *unixFileLock) release() error {
+	return nil
+}
+
 func newFileLock(path string, readOnly bool) (fl fileLock, err error) {
-	return nil, syscall.ENOTSUP
+	fl = &unixFileLock{}
+	return fl, nil
 }
 
 func setFileLock(f *os.File, readOnly, lock bool) error {
-	return syscall.ENOTSUP
+	return nil
 }
 
 func rename(oldpath, newpath string) error {
-	return syscall.ENOTSUP
+	return syscall.Rename(oldpath, newpath)
 }
 
 func isErrInvalid(err error) bool {
@@ -22,5 +30,5 @@ func isErrInvalid(err error) bool {
 }
 
 func syncDir(name string) error {
-	return syscall.ENOTSUP
+	return nil
 }
